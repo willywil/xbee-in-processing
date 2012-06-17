@@ -1,12 +1,108 @@
-# Compiled Object files
-*.slo
-*.lo
-*.o
+import processing.serial.*;
+Serial myPort;
 
-# Compiled Dynamic libraries
-*.so
+void setup() 
+{
+  size(500, 500);
+  println("Open Serial Port to Arduino."  + '\n');
+  println(Serial.list());
+  myPort = new Serial(this, Serial.list()[0], 9600);
+  myPort.bufferUntil('\n');
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
+  fill(255);
+  rect(225, 225, 50, 50);
+  fill(255);
+  rect(175, 225, 50, 50);
+  fill(255);
+  rect(275, 225, 50, 50);
+  fill(255);
+  rect(225, 175, 50, 50);
+}
+
+void draw() {
+  strokeWeight(2);
+  PFont book;
+  book = loadFont("BookAntiqua-50.vlw");
+  textFont(book, 50);
+
+  if (keyPressed)
+  {
+    if (key=='w')
+    {  
+      //Top block W
+      fill(150);
+      rect(225, 175, 50, 50);
+      fill(0);
+      textAlign(CENTER);
+      text("W", 250, 220);
+      myPort.write('w');
+    } 
+    else 
+    {
+      //Top block W
+      fill(255);
+      rect(225, 175, 50, 50);
+    } 
+
+    if (key=='d')
+    {
+      //Right block D
+      fill(150);
+      rect(275, 225, 50, 50);
+      fill(0);
+      textAlign(CENTER);
+      text("D", 300, 270);
+      myPort.write('d');
+    } 
+    else 
+    {
+      fill(255);
+      rect(275, 225, 50, 50);
+    }
+
+    if (key=='a')
+    {
+      //left block A
+      fill(150);
+      rect(175, 225, 50, 50);
+      fill(0);
+      textAlign(CENTER);
+      text("A", 199, 270);
+      myPort.write('a');
+    } 
+    else 
+    {
+      fill(255);
+      rect(175, 225, 50, 50);
+    }
+
+    if (key=='s')
+    {
+      //Center block S
+      fill(150);
+      rect(225, 225, 50, 50);
+      fill(0);
+      //line(250, 175, 250, 275);
+      textAlign(CENTER);
+      text("S", 250, 270);
+      myPort.write('s');
+    } 
+    else 
+    {
+      fill(255);
+      rect(225, 225, 50, 50);
+    }
+    if (key=='q')
+    {
+      fill(255);
+      rect(225, 225, 50, 50);
+      fill(255);
+      rect(175, 225, 50, 50);
+      fill(255);
+      rect(275, 225, 50, 50);
+      fill(255);
+      rect(225, 175, 50, 50);
+      myPort.write('q');
+    }
+  }
+}
